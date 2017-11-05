@@ -46,9 +46,6 @@
   (let* ((diff (abs (- line-number linum-last-pos)))
          (should-show (or (not linum-relativenumber-context)
                           (<= diff linum-relativenumber-context ))))
-
-
-
     (concat (propertize (format "%5d" line-number)
                         'face 'linum-relativenumber-line)
             (propertize (if (not should-show)
