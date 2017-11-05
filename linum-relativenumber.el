@@ -36,7 +36,11 @@
   "Face for displaying absolute line number"
   :group 'linum)
 
-(defvar linum-relativenumber-context 8 "How many relative line numbers to show")
+(defcustom linum-relativenumber-context nil
+  "Number of lines to show on each side of current line in
+  relative line number section. If nil, show all lines."
+  :type '(choice integer (const nil))
+  :group 'linum)
 
 (defun linum-relativenumber-format (line-number)
   (let* ((diff (abs (- line-number linum-last-pos)))
