@@ -36,14 +36,24 @@
   "Face for displaying absolute line number"
   :group 'linum)
 
+(defvar linum-relativenumber-context 8 "How many relative line numbers to show")
+
 (defun linum-relativenumber-format (line-number)
-  (let ((diff (abs (- line-number linum-last-pos))))
+  (let* ((diff (abs (- line-number linum-last-pos)))
+        (should-show (or
+                      (not linum-relativenumber-context)
+                      (<= diff linum-relativenumber-context ))))
+
+
+
     (concat (propertize (format "%5d" line-number)
                         'face 'linum-relativenumber-line)
-            (propertize (format "%3d" diff)
-                        'face (cond ((zerop diff) 'linum-relativenumber-zero)
-                                    ((eq 1 line-number) 'linum-relativenumber-top)
-                                    (t 'linum))))))
+            (if (not should-show) ""
+              (propertize (format "%3d" diff)
+                          'face (cond ((zerop diff) 'linum-relativenumber-zero)
+                                      ((eq 1 line-number) 'linum-relativenumber-top)
+                                      (t 'linum)))))))
+
 
 (setq linum-format 'linum-relativenumber-format)
 
