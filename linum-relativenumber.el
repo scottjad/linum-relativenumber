@@ -51,11 +51,12 @@
 
     (concat (propertize (format "%5d" line-number)
                         'face 'linum-relativenumber-line)
-            (if (not should-show) ""
-              (propertize (format "%3d" diff)
-                          'face (cond ((zerop diff) 'linum-relativenumber-zero)
-                                      ((eq 1 line-number) 'linum-relativenumber-top)
-                                      (t 'linum)))))))
+            (propertize (if (not should-show)
+                            "   "
+                          (format "%3d" diff))
+                        'face (cond ((zerop diff) 'linum-relativenumber-zero)
+                                    ((eq 1 line-number) 'linum-relativenumber-top)
+                                    (t 'linum))))))
 
 
 (setq linum-format 'linum-relativenumber-format)
