@@ -44,9 +44,8 @@
 
 (defun linum-relativenumber-format (line-number)
   (let* ((diff (abs (- line-number linum-last-pos)))
-        (should-show (or
-                      (not linum-relativenumber-context)
-                      (<= diff linum-relativenumber-context ))))
+         (should-show (or (not linum-relativenumber-context)
+                          (<= diff linum-relativenumber-context ))))
 
 
 
